@@ -3,30 +3,44 @@
 Ejercicio 16
 *******************************************************************************/
 #include <iostream>
-
+#include <iostream>
 using namespace std;
-void imprimirConteo(int num, int act);
+int contador=3,y=0;
+int valor;
 int main()
 {
-   int num = 0;
-   cout<<"Ingrese un numero: "<<endl;
-   cin>> num;
-   
-   imprimirConteo(num, 0);
-   
-   return 0;
-}
-void imprimirConteo(int num, int act){
-    
-    act++;
-    if(num==act)
-    {
-        cout<<act;
-    }
-    else
-    {
-        cout<<act;
-        imprimirConteo(num,act);
-        cout<<act;
-    }
+	int matriz[5][5];
+	for (int i=0;i<5;i++){//lleno la matriz
+    	for(int j=0;j<5;j++){
+    	matriz[i][j]=0;
+    	}
+	}
+	for(int x=0;x<5;x++){//5 filas
+	y=0;
+	cout<<"y" <<y<<endl;
+	    cout<<"x "<<x<<endl;
+	for(int y;y<5-contador;y++){
+	    cout<<"ingresa el valor a introducir : ";
+	    cin>>valor;
+	    matriz[x][y]=valor;
+	    cout<<"y" <<y<<endl;
+	    cout<<"x "<<x<<endl;
+	    }
+	}
+	 /* if(x==1){
+        contador--;
+	   }
+	    if(x>1){
+	   y++;
+	   }
+	  if(x==4){
+	   contador++;
+	   }*/
+	    
+	for(int l=0;l<5;l++){
+	    for(int d=0;d<5;d++){
+	     	cout<<matriz[l][d];
+	  }
+ cout<<endl;
+ }
 }

@@ -1,0 +1,32 @@
+/******************************************************************************
+Labo2 ejercicio 5
+
+*******************************************************************************/
+
+#include <iostream>
+using namespace std;
+
+void torres(int n, char de_torre,
+                    char a_torre, char torre_aux)
+{
+    if (n == 1)
+    {
+        cout << "mover disco 1 de torre " << de_torre <<
+                            " a torre " << a_torre<<endl;
+        return;
+    }
+    torres(n - 1, de_torre, torre_aux, a_torre);
+    cout << "mover disco " << n << " de torre " << de_torre <<
+                                " a torre " << a_torre << endl;
+    torres(n - 1, torre_aux, a_torre, de_torre);  
+}
+
+
+int main()
+{
+  int n;
+  cout<<"ingrese el numero de discos"<<endl;
+  cin>>n;
+    torres(n, 'A', 'C', 'B');
+    return 0;
+}

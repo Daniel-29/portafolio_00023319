@@ -1,0 +1,25 @@
+/******************************************************************************
+Labo2 ejercicio 8
+*******************************************************************************/
+
+#include <iostream>
+using namespace std;
+
+int recursiva(int n){
+    int suma;
+    if(n%10 ==0 && n <10){
+         return 0;
+    }
+    n = n/10;
+   return suma = 1 + recursiva(n);
+}
+
+int main()
+{
+   int n;
+   std::cout << "Ingrese el valor de un numero:" << std::endl;
+   std::cin >> n;
+  std::cout << "tiene "<<recursiva(n)<<" digitos" << std::endl; 
+    return 0;
+}
+

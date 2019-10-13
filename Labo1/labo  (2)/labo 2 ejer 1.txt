@@ -1,0 +1,25 @@
+/******************************************************************************
+Labo2 ejercicio 1
+*******************************************************************************/
+
+#include <iostream>
+using namespace std;
+
+int euclides(int mayor,int menor){
+    if(mayor/menor ==0){
+        std::cout <<" El MCD es: "<< mayor << std::endl;
+    }else{
+        menor=mayor;
+    std::cout << "El MCD es: " << menor << std::endl;
+    }
+    return menor;
+}
+
+int main()
+{
+    int mayor=0,menor=0;
+    std::cout << "Ingrese un valor mayor y una valor menor :" << std::endl;
+    cin >>mayor>>menor;
+    euclides(mayor,menor);
+    return 0;
+}

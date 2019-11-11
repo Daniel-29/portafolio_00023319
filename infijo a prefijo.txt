@@ -1,0 +1,113 @@
+#include<iostream>
+#include<stack>
+#include <type_traits>
+#include <string.h>
+using namespace std;
+stack <char> s;
+stack <char> r;
+template< typename T > constexpr size_t countof( const T & ) noexcept {
+  return sizeof( T ) / sizeof( typename remove_all_extents< T >::type );
+}
+int what_is(char e){
+    if( e =='('){
+        return 0;
+    }else if(e ==')' ){
+        return 1;
+    }else if(e == '+' || e == '-' || e == '*' || e == '/' || e == '^'){
+        return 2;
+    }else if(isalpha(e) || isdigit(e)){
+        return 3;
+    }
+}
+ 
+int priority(char e){
+    int pri = 0;
+    if( e =='^'){
+         pri = 3;
+    }
+    else if(e == '*' || e == '/' ){
+         pri = 2;
+    }else if(e == '+' || e == '-'){
+         pri = 1;
+    }
+    return pri;
+}
+void vaciar_pila(){
+    while(!s.empty()){
+        char ch = s.top();
+        if(what_is(ch)==0 || what_is(ch) ==1 ){
+            s.pop(); 
+        }else{
+            r.push( ch ); 
+            s.pop();
+        }
+    }
+}
+void print_stack(){
+    string b="";
+    while(!r.empty()){
+        b = b+r.top();
+        r.pop();
+    }
+    std::cout << b << std::endl;
+    /*for(int i =b.length(); i >= 0 ; i--){
+        std::cout << b[i-1];
+    }*/
+     
+}
+void evaluar_operador(char e){
+    if(s.empty() || what_is(s.top())==0 ){
+        s.push(e);
+        
+    }else{
+        if(priority(e) > priority( s.top() )){
+            s.push(e);
+        }else{
+            r.push(s.top());
+            s.pop();
+            s.push(e);
+        }
+    }
+}
+string  clearlastposicion(string a){
+    string b="";
+    for (int i=0 ; i<a.length()-1 ;i++ ) {
+         b=b+a[i];
+    }
+    return b;
+}
+void  prefija(string a){
+    int begin = a.length();
+    if(begin ==0){
+        std::cout << "se detiene" << std::endl;
+        print_stack();
+       
+    }else{
+        char ch = a[begin-1];
+        int is = what_is(ch);
+        switch(is){
+            case 0: 
+                 vaciar_pila();
+                break;
+            case 1:
+                s.push(ch);
+                break;
+            case 2:
+                evaluar_operador(ch);
+                break;
+            case 3:
+                r.push(ch);
+                break;
+        }
+        string b= clearlastposicion(a);
+        prefija(b);
+    }
+}
+
+int main()
+{
+    string a = "A/B+C*D-E*F";
+    a="("+a+")";
+    prefija(a);
+    return 0;
+}

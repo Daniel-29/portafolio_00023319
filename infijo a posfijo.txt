@@ -5,8 +5,6 @@
 using namespace std;
 stack <char> s;
 stack <char> r;
-template< typename T > constexpr size_t countof( const T & ) noexcept {
-  return sizeof( T ) / sizeof( typename remove_all_extents< T >::type );
 }
 int what_is(char e){
     if( e =='('){
@@ -68,21 +66,15 @@ void evaluar_operador(char e){
         }
     }
 }
-string  clearfristposicion(string a){
-    string b="";
-    for (int i=1 ; i<a.length() ;i++ ) {
-         b=b+a[i];
-    }
-    return b;
-}
-void  postfija(string a){
+
+void  postfija(string a,int p){
     int begin = a.length();
-    if(begin ==0){
+    if(begin == p){
         std::cout << "se detiene" << std::endl;
         print_stack();
        
     }else{
-        char ch = a[0];
+        char ch = a[p];
         int is = what_is(ch);
         switch(is){
             case 0: 
@@ -98,14 +90,13 @@ void  postfija(string a){
                 r.push(ch);
                 break;
         }
-        string b= clearfristposicion(a);
-        postfija(b);
+        postfija(a,p+1);
     }
 }
 
 int main()
 {
-    string a = "((A+B)*(C+D-E)*F)";
-    postfija(a);
+    string a = "((A+B)*(C+D-E)*(F))";
+    postfija(a,0);
     return 0;
 }
